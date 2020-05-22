@@ -32,6 +32,7 @@ PostsModel.findSpecific = function(req,callBack){
 PostsModel.findTopic = function(req,callBack){
     let post = { typeOf: req.body.typeOf};
     // JSON.stringify(post);
+    // console.log(post)
     PostsModel.find(post,callBack).sort({date: -1});
 }
 

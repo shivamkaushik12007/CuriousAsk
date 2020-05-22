@@ -9,9 +9,9 @@ class Comment extends Component{
         }
     }
 
-    // componentDidMount(){
-    //     this.fetchComments();
-    // }
+    componentDidMount(){
+        this.fetchComments();
+    }
 
     render(){
         return(
@@ -30,13 +30,13 @@ class Comment extends Component{
         )
     }
 
-    fetchComments=(event)=>{
-        event.preventDefault();
+    fetchComments=()=>{
+        // event.preventDefault();
         var comment={
             token:this.props.state.token,
-            userId:this.props.userid
+            postId:this.props.postid
         }
-        fetch("http://127.0.0.1:4000/user/findTopic",{
+        fetch("http://127.0.0.1:4000/comment/findComment",{
                 method:'POST',
                 headers:{
                     'content-Type': 'application/json'

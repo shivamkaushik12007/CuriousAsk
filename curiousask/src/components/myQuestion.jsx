@@ -7,7 +7,8 @@ class MyQuestion extends Component{
         super(props);
         this.state={
             postList:[],
-            postid:""
+            postid:"",
+            type:["a","Computer Science","Architecture","Management","Business","Electrical","Mechanical"]
         }
     }
     componentDidMount(){
@@ -32,8 +33,13 @@ class MyQuestion extends Component{
                                 <div>
                                     <h1>{post.content}</h1>
                                 </div>
-                                <div className="text-right">
-                                    <button className="btn btn-primary" onClick={()=>this.discussionOpen(post._id)}>discussion</button>
+                                <div className="row">
+                                    <div className="col-sm-6 text-left">
+                                        {this.state.type[post.typeOf]}
+                                    </div>
+                                    <div className="col-sm-6 text-right">
+                                        <button className="btn btn-primary" onClick={()=>this.discussionOpen(post._id)}>discussion</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

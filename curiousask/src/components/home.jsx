@@ -9,12 +9,21 @@ class Home extends Component{
         this.state={
             postList:[],
             postid:"",
-            changing:false
+            changing:false,
+            type:["a","Computer Science","Architecture","Management","Business","Electrical","Mechanical"]
         }
-    }    
+    }  
+
     componentDidMount(){
         this.getPost();
     }
+
+    componentDidUpdate(prevProps){
+        if(this.props.search!=prevProps.search){
+            this.getPost();
+        }
+    }
+
     render(){
         return(
             <div className="row">
@@ -34,8 +43,13 @@ class Home extends Component{
                                         <h1>{post.content}</h1>
                                     </div>
                                     <div>
-                                    <div className="text-right">
-                                        <button className="btn btn-primary" onClick={()=>this.discussionOpen(post._id)}>discussion</button>
+                                    <div className="row">
+                                        <div className="col-sm-6 text-left">
+                                            {this.state.type[post.typeOf]}
+                                        </div>
+                                        <div className="col-sm-6 text-right">
+                                            <button className="btn btn-primary" onClick={()=>this.discussionOpen(post._id)}>discussion</button>
+                                        </div>
                                     </div>
                                     </div>
                                 </div>
@@ -78,7 +92,7 @@ class Home extends Component{
                 console.log(`The error is : ${JSON.stringify(res)}`)
             })
         }else{
-            fetch("http://127.0.0.1:4000/user/findTopic",{
+            fetch("http://127.0.0.1:4000/post/findTopic",{
                 method:'POST',
                 headers:{
                     'content-Type': 'application/json'

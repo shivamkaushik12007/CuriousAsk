@@ -55,7 +55,7 @@ class Question extends Component{
     }
     
     textRef=(element)=>{
-        this.setState({content:element})
+        this.setState({content:element.target.value})
     }
 
     fetchPost=()=>{
@@ -74,7 +74,7 @@ class Question extends Component{
                 return res.json()
             })
             .then(res=>{
-                console.log(res)
+                // console.log(res)
                 this.setState({post:res[0]});
             })
             .catch(res=>{
@@ -86,12 +86,12 @@ class Question extends Component{
         event.preventDefault();
         var comment={
             token:this.props.state.token,
-            userId:this.props.postid,
+            postId:this.props.postid,
             content:this.state.content,
             userName:this.props.state.userName,
-            date:new Date.now()
+            date:Date.now()
         }
-        fetch("http://127.0.0.1:4000/post/findSpecific",{
+        fetch("http://127.0.0.1:4000/comment/addComment",{
                 method:'POST',
                 headers:{
                     'content-Type': 'application/json'

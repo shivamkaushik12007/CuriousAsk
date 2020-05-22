@@ -7,12 +7,12 @@ router.post('/addComment',(req,res)=>{
         if(error){
             res.sendStatus('403')
         }else{
-            res.send('post has been added')
+            res.send(response)
         }
     })
 })
 
-router.get('/findComment',(req,res)=>{
+router.post('/findComment',(req,res)=>{
     CommentModel.findComment(req,(error,response)=>{
         if(error){
             res.sendStatus('404')

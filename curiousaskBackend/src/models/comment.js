@@ -20,13 +20,17 @@ const commentSchema = new mongoose.Schema({
 const CommentModel = mongoose.model("Comments",commentSchema,"comments");
 
 CommentModel.addComment = function(req,callBack){
-    let comment=req.body;
+    let comment={
+        postId:req.body.postId,
+        userName:req.body.userName,
+        content:req.body.content,
+        date:req.body.date
+    }
     CommentModel.create(comment, callBack);
 }
 
 CommentModel.findComment = function(req,callBack){
     let comment = {postId:req.body.postId};
-    JSON.stringify(comment);
     CommentModel.find(comment, callBack);
 }
 

@@ -71,7 +71,6 @@ class QuestionPost extends Component{
         .then(res=>{
             if(res.content.length>0){
                 this.props.updating();
-                // this.componentWillUpdate;
             }
         })
         .catch(err=>{

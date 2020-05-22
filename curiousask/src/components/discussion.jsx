@@ -11,7 +11,7 @@ class Discussion extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{height:"80vh",width:"34vw",overflow:"scroll",position:"fixed"}}>
                 <div>
                 <div className="display-4 text-light font-weight-bolder text-center p-3 bg-info">
                     Discussion

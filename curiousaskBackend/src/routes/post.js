@@ -19,6 +19,7 @@ router.post('/findTopic',(req,res)=>{
             res.sendStatus('404')
         }else{
             res.send(response)
+            // console.log(response)
         }
     })
 })
