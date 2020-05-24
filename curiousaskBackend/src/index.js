@@ -6,9 +6,9 @@ require('./dbConnection');
 const user=require('./routes/user');
 const post=require('./routes/post');
 const comment=require('./routes/comment');
+const {port,secret}=require('../config');
 
 const app = express();
-const port = 4000;
 const verifyUser=(req,res,next)=>{ 
     var token = req.body.token;
     // console.log(req.query.typeOf)
@@ -20,7 +20,7 @@ const verifyUser=(req,res,next)=>{
     }else{
         var payload
         try {
-            payload = jwt.verify(token, "secretKey")
+            payload = jwt.verify(token, secret)
         // console.log("token ok")
         } catch (e) {
             if (e instanceof jwt.JsonWebTokenError) {

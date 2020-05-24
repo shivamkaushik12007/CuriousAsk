@@ -1,7 +1,8 @@
 const mongoose=require('mongoose');
 mongoose.set('useCreateIndex', true);
+const {url}=require('../config');
 
-mongoose.connection.openUri('mongodb+srv://mapp:project123!@cluster0-xq5iu.mongodb.net/test?retryWrites=true&w=majority',{
+mongoose.connection.openUri(url,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

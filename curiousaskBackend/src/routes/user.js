@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router()
 const UsersModel = require('./../models/user')
 const jwt = require('jsonwebtoken')
+const {secret}=require('../../config')
 
 const tokenGenerator = (user,email)=>{
     // console.log(user,email);
     const token = jwt.sign(
         { userName:user,
         eMail:email }, 
-        "secretKey", {
+        secret, {
 		algorithm: "HS256",
     })
     return token
