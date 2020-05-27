@@ -36,7 +36,7 @@ class Profile extends Component{
                         </div>
                         <div className="row p-2">
                             <div className="col-sm-6">
-                                {this.state.nope?(<h6 className="text-danger">New password can not be same as old one!</h6>):<p></p>}
+                                {this.state.nope?(<h6 className="text-danger">Both the psswords are same</h6>):<p></p>}
                             </div>
                             <div className="p-2 text-right col-sm-6">
                             <button className="btn btn-primary" onClick={this.changePass}>Change My Password!</button>

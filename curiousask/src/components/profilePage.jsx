@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import MyQuestion from './myQuestion';
 import Profile from './profile';
 import Home  from './home';
@@ -9,10 +10,15 @@ class ProfilePage extends Component{
         this.state={
             check:0,
             search:"0",
-            name:"Shivam Kaushik",
+            logOut:false
         }
     }
     render(){
+        if(this.state.logOut){
+            return <Redirect to={{
+                pathname:'/',
+            }}/>
+        }
         return(
             <div>
                 <div className="row  align-middle h-50 p-3 bg-danger sticky-top">
@@ -34,7 +40,7 @@ class ProfilePage extends Component{
                     </div>
                     <div className="col-sm-6 d-flex flex-row-reverse row pt-3">
                         <div className="col-xs-3">
-                            <button className="btn text-light btn-lg nohover">logout</button>
+                            <button className="btn text-light btn-lg nohover" onClick={this.logOut}>logout</button>
                         </div>
                         <div className="col-xs-3">
                             <button className="btn text-light btn-lg" onClick={this.changeThree}>Profile</button>
@@ -67,8 +73,12 @@ class ProfilePage extends Component{
         )
     }
 
+    logOut=()=>{
+        this.setState({logOut:true});
+    }
+
     textRef=(element)=>{
-        this.setState({search:element.target.value},()=>{console.log("change")});
+        this.setState({search:element.target.value},()=>{});
     }
     
     changeOne=()=>{

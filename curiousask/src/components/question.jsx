@@ -6,6 +6,7 @@ class Question extends Component{
         super(props);
         this.state={
             content:"",
+            rComment:false,
             post:{}
         }
     }
@@ -35,7 +36,7 @@ class Question extends Component{
                         <div>
                             <div className="form-group p-3">
                                 <div>
-                                    <textarea className="form-control" onChange={this.textRef.bind(this)}/>
+                                    <textarea className="form-control" onChange={this.textRef.bind(this)} id="content"/>
                                 </div>
                                 <div className="text-right p-2">
                                     <button className="btn btn-primary" onClick={this.postComment}>Answer it!</button>
@@ -44,7 +45,7 @@ class Question extends Component{
                         </div>
                         <div>
                             <div className="p-2 pl-4">
-                                <Comment state={this.props.state} postid={this.props.postid}/>
+                                <Comment state={this.props.state} postid={this.props.postid} refreshingComment={this.state.rComment}/>
                             </div>
                         </div>
                     </div>
@@ -101,6 +102,10 @@ class Question extends Component{
             .then(res=>{
                 if(res.ok)
                     return res.json()
+            })
+            .then(res=>{
+                this.setState({content:"",rComment:!this.state.rComment})
+                document.getElementById("content").value=""
             })
             .catch(res=>{
                 console.log(`The error is : ${JSON.stringify(res)}`)

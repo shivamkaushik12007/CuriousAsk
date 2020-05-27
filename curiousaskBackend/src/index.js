@@ -20,7 +20,7 @@ const verifyUser=(req,res,next)=>{
     }else{
         var payload
         try {
-            payload = jwt.verify(token, secret)
+            payload = jwt.verify(token, secret,"HS256")
         // console.log("token ok")
         } catch (e) {
             if (e instanceof jwt.JsonWebTokenError) {

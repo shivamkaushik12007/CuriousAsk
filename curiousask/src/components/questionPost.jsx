@@ -9,9 +9,7 @@ class QuestionPost extends Component{
             post:"0"
         }
     }
-    componentWillUpdate(){
-
-    }
+    
     render(){
         return(
             <div className="form-group p-3">

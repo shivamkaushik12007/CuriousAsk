@@ -13,6 +13,12 @@ class Comment extends Component{
         this.fetchComments();
     }
 
+    componentDidUpdate(prevProps){
+        if(this.props.refreshingComment!==prevProps.refreshingComment||this.props.postid!==prevProps.postid){
+            this.fetchComments();
+        }
+    }
+
     render(){
         return(
             <div>

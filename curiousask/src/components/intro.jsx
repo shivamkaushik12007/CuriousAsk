@@ -8,7 +8,6 @@ class Intro extends Component{
         this.state={
             pnm:false,
             enm:false,
-            unm:false,
             lnm:false,
             userDetail:{},
             redir1:false,
@@ -22,7 +21,9 @@ class Intro extends Component{
             pass1:"",
             pass2:"",
             check1:false,
-            check2:false
+            check2:false,
+            errorMessage1:"",
+            errorMessage2:""
         }
     }
     render(){
@@ -70,7 +71,7 @@ class Intro extends Component{
                                 </div>   
                             </div>
                         </form>
-                        {this.state.lnm?(<div className="text-light text-center font-weight-bold">UserName or Password is wrong...try again!</div>)
+                        {this.state.lnm?(<div className="text-light text-center font-weight-bold">{this.state.errorMessage1}...try again!</div>)
                         :<p></p>}
                     </div>
                 </div>
@@ -101,8 +102,7 @@ class Intro extends Component{
                                 <input type="password" placeholder="Rewrite Password" className="form-control" onChange={this.pass2.bind()}></input>
                             </div>
                             {this.state.pnm?(<div className="pt-3 pl-3 text-danger text-left">Your password does not match!</div>)
-                            :this.state.enm?(<div className="pt-3 pl-3 text-danger text-left">This email is already in use!</div>)
-                            :this.state.unm?(<div className="pt-3 pl-3 text-danger text-left">This username is taken try another!</div>)
+                            :this.state.enm?(<div className="pt-3 pl-3 text-danger text-left">{this.state.errorMessage2}</div>)
                             :<p></p>}
                             <div className="col-sm-12 pt-3 text-center">
                                 <button type="submit"  className="btn btn-primary">SignUp</button>
@@ -138,8 +138,9 @@ class Intro extends Component{
         .then(res=>{
             if(res.ok){
                 this.setState({check1:true})
-                // console.log(res.json())
                 return res.json()
+            }else{
+                this.setState({errorMessage1:res.statusText})
             }
         })
         .then(res=>{
@@ -156,7 +157,7 @@ class Intro extends Component{
             this.setState({lnm:true})
         })
         .catch(err=>{
-            console.log(err)
+            this.setState({errorMessage1:"An error occured try after some time"})
         })
     }
 
@@ -207,6 +208,8 @@ class Intro extends Component{
                 if(res.ok){
                     this.setState({check2:true})
                     return res.json()
+                }else{
+                    this.setState({errorMessage2:res.statusText})
                 }
             })
             .then(res=>{
@@ -220,9 +223,8 @@ class Intro extends Component{
                 this.setState({enm:true})
             })
             .catch(err=>{
-                console.log(err)
+                this.setState({errorMessage2:"An error occured try after some time"})
             })
-            // console.log(user);
         }else{
             this.setState({pnm:true})
         }
