@@ -37,7 +37,6 @@ class Comment extends Component{
     }
 
     fetchComments=()=>{
-        // event.preventDefault();
         var comment={
             token:this.props.state.token,
             postId:this.props.postid
@@ -56,7 +55,7 @@ class Comment extends Component{
                 this.setState({comments:res});
             })
             .catch(res=>{
-                console.log(`The error is : ${JSON.stringify(res)}`)
+                // console.log(`The error is : ${JSON.stringify(res)}`)
             })
     }
 }

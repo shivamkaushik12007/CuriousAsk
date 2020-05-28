@@ -80,7 +80,7 @@ class MyQuestion extends Component{
             this.setState({postList:res});
         })
         .catch(res=>{
-            console.log(`The error is : ${JSON.stringify(res)}`)
+            // console.log(`The error is : ${JSON.stringify(res)}`)
         })
     }
 }

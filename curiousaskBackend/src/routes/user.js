@@ -53,7 +53,7 @@ router.post('/addUser',async (req,res)=>{
         if(validEmail){
             res.statusMessage="This Email Id is already in use";
             res.status('403').end()
-        } else{
+        }else{
             UsersModel.addUser(req,(error,response)=>{
                 if(error){
                     res.sendStatus('403').end()

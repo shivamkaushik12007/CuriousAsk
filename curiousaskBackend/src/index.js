@@ -4,6 +4,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 require('./dbConnection');
 const user=require('./routes/user');
+const passChange=require('./routes/passChange');
 const post=require('./routes/post');
 const comment=require('./routes/comment');
 const {port,secret}=require('../config');
@@ -11,7 +12,6 @@ const {port,secret}=require('../config');
 const app = express();
 const verifyUser=(req,res,next)=>{ 
     var token = req.body.token;
-    // console.log(req.query.typeOf)
     if(req.query.token&&req.query.token.length>0){
         token = req.query.token   
     }
@@ -21,7 +21,6 @@ const verifyUser=(req,res,next)=>{
         var payload
         try {
             payload = jwt.verify(token, secret,"HS256")
-        // console.log("token ok")
         } catch (e) {
             if (e instanceof jwt.JsonWebTokenError) {
                 return res.status(401).end()
@@ -37,7 +36,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use("*", (req, res, next) => {
-    console.log("Middleware is called");
+    // console.log("Middleware is called");
     res.setHeader('Access-Control-Allow-Origin', "*")
     res.setHeader("Access-Control-Allow-Headers", "ontent-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     res.setHeader("Access-Control-Allow-Methods", "*")
@@ -45,6 +44,7 @@ app.use("*", (req, res, next) => {
 })
 
 app.use('/user',user);
+app.use('/passChange',verifyUser,passChange);
 app.use('/post',verifyUser,post);
 app.use('/comment',verifyUser,comment);
 

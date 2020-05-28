@@ -7,7 +7,6 @@ router.post('/addPost',(req,res)=>{
         if(error){
             res.sendStatus('403')
         }else{
-            // console.log(response)
             res.send(response)
         }
     })
@@ -19,25 +18,21 @@ router.post('/findTopic',(req,res)=>{
             res.sendStatus('404')
         }else{
             res.send(response)
-            // console.log(response)
         }
     })
 })
 
 router.post('/findSpecific',(req,res)=>{
-    // console.log(req.body)
     PostsModel.findSpecific(req,(error,response)=>{
         if(error){
             res.sendStatus('404')
         }else{
-            // console.log(response)
             res.send(response)
         }
     })
 })
 
 router.get('/findAll',(req,res)=>{
-    // console.log("route check")
     PostsModel.findAll(req,(error,response)=>{
         if(error){
             res.sendStatus('404')

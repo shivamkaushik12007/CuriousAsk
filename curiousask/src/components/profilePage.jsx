@@ -95,7 +95,6 @@ class ProfilePage extends Component{
 
     search=(event)=>{
         event.preventDefault();
-        console.log(this.state.search);
     }
 }
 export default ProfilePage;

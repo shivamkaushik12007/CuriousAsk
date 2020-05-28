@@ -75,11 +75,10 @@ class Question extends Component{
                 return res.json()
             })
             .then(res=>{
-                // console.log(res)
                 this.setState({post:res[0]});
             })
             .catch(res=>{
-                console.log(`The error is : ${JSON.stringify(res)}`)
+                // console.log(`The error is : ${JSON.stringify(res)}`)
             })
     }
 
@@ -108,7 +107,7 @@ class Question extends Component{
                 document.getElementById("content").value=""
             })
             .catch(res=>{
-                console.log(`The error is : ${JSON.stringify(res)}`)
+                // console.log(`The error is : ${JSON.stringify(res)}`)
             })
     }
 }

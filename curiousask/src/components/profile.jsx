@@ -6,7 +6,9 @@ class Profile extends Component{
         this.state={
             pass1:"",
             pass2:"",
-            nope:false
+            nope:false,
+            pope:false,
+            errorMessage:""
         }
     }
     render(){
@@ -36,7 +38,9 @@ class Profile extends Component{
                         </div>
                         <div className="row p-2">
                             <div className="col-sm-6">
-                                {this.state.nope?(<h6 className="text-danger">Both the psswords are same</h6>):<p></p>}
+                                {this.state.pope?(<h6 className="text-success">Password Changed...Enjoy!</h6>):
+                                this.state.nope?(<h6 className="text-danger">{this.state.errorMessage}</h6>):
+                                <p></p>}
                             </div>
                             <div className="p-2 text-right col-sm-6">
                             <button className="btn btn-primary" onClick={this.changePass}>Change My Password!</button>
@@ -59,15 +63,34 @@ class Profile extends Component{
     changePass=(event)=>{
         event.preventDefault();
         if(this.state.pass1===this.state.pass2){
-            this.setState({nope:true});
+            this.setState({errorMessage:"Both the passwords are same",nope:true,pope:false});
         }else{
-            console.log(this.state.pass1);
-            console.log(this.state.pass2);
             var user={
+                token:this.props.state.token,
+                userId:this.props.state.userId,
+                userName:this.props.state.userName,
                 pass1:this.state.pass1,
                 pass2:this.state.pass2
             }
-            console.log(user);
+            console.log(user)
+            fetch("http://127.0.0.1:4000/passChange/changePass",{
+                method:'PUT',
+                headers:{
+                    'content-Type': 'application/json'
+                },
+                body:JSON.stringify(user)
+            })
+            .then(res=>{
+                if(res.ok){
+                    this.setState({pope:true,nope:false});
+                    return res.json();
+                }else{
+                    this.setState({errorMessage:res.statusText,nope:true,pope:false});
+                }
+            })
+            .catch(res=>{
+                // console.log(`The error is : ${JSON.stringify(res)}`)
+            })
         }
     }
 }

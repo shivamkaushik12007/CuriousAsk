@@ -89,7 +89,7 @@ class Home extends Component{
                 this.setState({postList:res});
             })
             .catch(res=>{
-                console.log(`The error is : ${JSON.stringify(res)}`)
+                // console.log(`The error is : ${JSON.stringify(res)}`)
             })
         }else{
             fetch("http://127.0.0.1:4000/post/findTopic",{
@@ -106,7 +106,7 @@ class Home extends Component{
                 this.setState({postList:res});
             })
             .catch(res=>{
-                console.log(`The error is : ${JSON.stringify(res)}`)
+                // console.log(`The error is : ${JSON.stringify(res)}`)
             })
         }
     }
