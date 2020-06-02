@@ -22,6 +22,9 @@ class Intro extends Component{
             pass2:"",
             check1:false,
             check2:false,
+            userCheck1:false,
+            userCheck2:false,
+            userMessage:"",
             errorMessage1:"",
             errorMessage2:""
         }
@@ -90,7 +93,15 @@ class Intro extends Component{
                                 </div>
                             </div>
                             <div className="col-sm-12 pt-3">
+                                <div>
                                 <input type="text" placeholder="UserName" className="form-control" onChange={this.uname.bind()}></input>
+                                </div>
+                                <div>
+                                    {this.state.userCheck1?(<div className="pt-3 pl-3 text-danger text-left">{this.state.userMessage}</div>):
+                                    this.state.userCheck2?(<div className="pt-3 pl-3 text-success text-left">{this.state.userMessage}</div>):
+                                    <div></div>
+                                }
+                                </div>
                             </div>
                             <div className="col-sm-12 pt-3">
                                 <input type="email" placeholder="Email" className="form-control" onChange={this.email.bind()}></input>
@@ -164,6 +175,24 @@ class Intro extends Component{
     
     uname=(element)=>{
         this.setState({uname:element.target.value})
+        fetch(`http://127.0.0.1:4000/user/checkUser?userName=${element.target.value}`,{
+            method:'GET',
+            headers:{
+                'content-Type': 'application/json'
+            }
+        })
+        .then(res=>{
+            if(res.ok){
+                console.log('yaha')
+                this.setState({userCheck1:false,userCheck2:true,userMessage:res.statusText})
+                return res.json()
+            }else{
+                this.setState({userCheck2:false,userCheck1:true,userMessage:res.statusText})
+            }
+        })
+        .catch(err=>{
+            this.setState({errorMessage1:"An error occured try after some time"})
+        })
     }
 
     fname=(element)=>{

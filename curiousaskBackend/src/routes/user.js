@@ -70,4 +70,15 @@ router.post('/addUser',async (req,res)=>{
     }
 })
 
+router.get('/checkUser',async (req,res)=>{
+    const validUserName=await UsersModel.findOne({userName:req.query.userName})
+    if(validUserName){ 
+        res.statusMessage="This UserName is already in use";
+        res.status('404').end()
+    }else{
+        res.statusMessage="Good to go!";
+        res.send('done').end();
+    }
+})
+
 module.exports = router;
